@@ -148,7 +148,7 @@ public class addCourseForm extends javax.swing.JFrame {
         MainForm.jLabel_CrsCount.setText(" Course count = "+Integer.toString(MyFunction.countData("course")));
         
         manageCourseForm.jTable1.setModel(new DefaultTableModel(null, new Object[]{"Id","Label","Hours"}));
-        
+        c.fillCourseJtable(manageCourseForm.jTable1);
         
         }else{
             JOptionPane.showMessageDialog(null, "Course Already Exists");

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -124,6 +125,57 @@ public class course {
         }
         
     }
+      public int getCourseId(String courseLabel){
+
+     int courseId = 0;
      
+      Connection con = MyConnection.getConnection();
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement("SELECT * FROM `course` WHERE `label` = ?");
+            ps.setString(1,courseLabel);
+            
+            ResultSet rs = ps.executeQuery();
+         
+            if(rs.next()){
+               
+             courseId = rs.getInt("Id");   
+            }
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+     
+     
+     return courseId;
     
+      }
+        
+        public void fillCourseCombo(JComboBox combo)
+    {
+        Connection con = MyConnection.getConnection();
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement("SELECT  *FROM `course` ");
+            ResultSet rs = ps.executeQuery();
+           
+            while(rs.next()){
+               
+              combo.addItem(rs.getString(2));  
+              
+                
+            }
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+      
+
 }
